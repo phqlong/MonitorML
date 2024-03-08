@@ -1,0 +1,21 @@
+[{
+    "token": "12345678",
+    "status": "training",
+    "model_name": "llamma2",
+    "model_checkpoint": "Llamma2",
+    "data_path": "data/llamma2_12345678"
+}, {
+    "token": "12345679",
+    "status": "active",
+    "model_name": "Llamma2",
+    "model_checkpoint": "Llamma2",
+    "data_path": "data/llamma2_12345679"
+},
+{
+    "token": "12345680",
+    "status": "archived",
+    "model_name": "Llamma2",
+    "model_checkpoint": "Llamma2",
+    "data_path": "data/llamma2_12345680"
+}
+]

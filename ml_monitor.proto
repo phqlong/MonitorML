@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+service MLService {
+    // API: Get status of ML system:
+    // Request:
+    //  token
+    // Return: 
+    //  status: ML System status
+    //  - training: The ML model is currently undergoing training on new data or fine-tuning its parameters.
+    //  - testing: The ML model is being tested on a test dataset to assess its performance.
+    //  - staging: The ML system is deployed in a staging environment for final testing before production deployment.
+    //  - active: The ML system is deployed and actively serving predictions in production.
+    //  - inactive: The ML system is not currently deployed or in use.
+    rpc GetStatus(StatusRequest) returns (StatusResponse);
+
+    // API: Upload raw data into ML system:
+    // Request: 
+    //  token
+    //  data: raw data in bytes (files) or base64
+    // Return: 
+    //  status:
+    //  - ok: 
+    //  - failed:
+    rpc UploadData(DataUploadRequest) returns (DataUploadResponse);
+
+    rpc Inference (InferenceRequest) returns (InferenceResponse);
+
+    // rpc Export(ActionRequest) returns (StatusResponse);
+    // rpc CreateDataset(ActionRequest) returns (StatusResponse);
+    // rpc Logs(ActionRequest) returns (StatusResponse);
+    // rpc DownloadCheckpoint(ActionRequest) returns (StatusResponse);
+}
+
+
+message StatusRequest {
+    string token = 1;
+}
+
+message StatusResponse {
+    string status = 1;
+}
+
+
+message DataUploadRequest {
+    string token = 1;
+    repeated FileUpload files = 2;
+}
+
+message FileUpload {
+    string filename = 1;
+    bytes content = 2;
+}
+
+message DataUploadResponse {
+    repeated string messages = 1;
+}
+
+
+message InferenceRequest{
+    string token = 1;
+    string prompt = 2;
+}
+
+message InferenceResponse{
+    string result = 1;
+}
